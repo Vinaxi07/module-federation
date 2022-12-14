@@ -15,28 +15,23 @@ module.exports = {
     port: 3001,
     historyApiFallback: true,
   },
-
+  
   module: {
-    rules: [
-      {
-        test: /\.m?js/,
-        type: "javascript/auto",
-        resolve: {
-          fullySpecified: false,
-        },
+
+    rules: [{
+      test: /.jsx?$/,
+      loader: 'babel-loader',
+      exclude: /node_modules/
+    }, {
+      test: /\.(css|scss)$/i,
+      use: ['style-loader', 'css-loader'],
+    }, {
+      test: /\.(jpe?g|png|gif|woff|woff2|eot|ttf|svg)(\?[a-z0-9=.]+)?$/,
+      loader: 'url-loader',
+      options: {
+        limit: 8192,
       },
-      {
-        test: /\.(css|s[ac]ss)$/i,
-        use: ["style-loader", "css-loader", "postcss-loader"],
-      },
-      {
-        test: /\.(ts|tsx|js|jsx)$/,
-        exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-        },
-      },
-    ],
+    }]
   },
 
   plugins: [

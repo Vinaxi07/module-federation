@@ -6,7 +6,7 @@ import "./product-list.css";
 const GridCard = ({ item = {
   id: 1,
   name: 'iphone',
-  image: '',
+  image: require("./assets/iphone.png").default,
   offer: '10% off',
   claimed: 20,
   price: 50
