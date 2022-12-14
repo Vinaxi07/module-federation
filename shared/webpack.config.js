@@ -43,9 +43,10 @@ module.exports = {
     new ModuleFederationPlugin({
       name: "shared",
       filename: "remoteEntry.js",
-      remotes: {},
+      remotes: {
+        shared: "shared@http://localhost:3000/remoteEntry.js",
+      },
       exposes: {
-        "./Header": "./src/Header",
         './grid-card':'./src/grid-card'
       },
       shared: {
