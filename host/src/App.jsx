@@ -12,7 +12,7 @@ const App = () => {
   return (
     <div className="wrapper">
       <header>
-        <h1 className="service-worker-title">Vodafone App</h1>
+        <h1 className="app-header">Vodafone App</h1>
       </header>
 
       <div className="grid-container">
