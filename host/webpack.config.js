@@ -57,7 +57,8 @@ module.exports = (env) => {
           ...deps,
           react: {
             singleton: true,
-            requiredVersion: deps.react,
+            //strictVersion:true,
+            requiredVersion: deps.react, //">=17.0.0<18.0.0."
           },
           "react-dom": {
             singleton: true,
