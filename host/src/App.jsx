@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
+// import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import { ProductsList as ProductsListConst } from "./constants/index.js";
-
 import { GridCard } from "shared/grid-card";
+import { Cart } from "shared/cart";
 
 import "./index.scss";
 
 const App = () => {
-
   return (
     <div className="wrapper">
       <header>

@@ -47,7 +47,9 @@ module.exports = {
         shared: "shared@http://localhost:3000/remoteEntry.js",
       },
       exposes: {
-        './grid-card':'./src/grid-card'
+        './grid-card':'./src/grid-card',
+        './cart':'./src/cart'
+
       },
       shared: {
         ...deps,

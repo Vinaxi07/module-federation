@@ -1,4 +1,4 @@
-.service-worker-title{
+.app-header{
     padding: 16px;
     margin: 0px;
     text-align: center;
@@ -65,6 +65,17 @@
 
   }
 
+.cart-button{
+  border: 2px solid #f15f5f;
+  background-color: #ffffffe0;
+  color: #ce2209;
+  padding: 0px 8px;
+  font-size: 13px;
+  cursor: pointer;
+  border-radius: 10px;
+  height: 29px;
+  margin-top: 8px;
+}
 
 
 @keyframes fadeIn { 

@@ -1,32 +1,32 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
-const webpack = require('webpack'); 
-const dotenv = require('dotenv').config({ path: './.env' }); 
+const webpack = require('webpack');
+const dotenv = require('dotenv').config({ path: './.env' });
 
 
 const deps = require("./package.json").dependencies;
 
 //---------------------------------using local repo URLs---------------------------------//
 
-module.exports =(env)=>{
-  console.log({env});
+module.exports = (env) => {
+  console.log({ env });
   return {
     output: {
       publicPath: "http://localhost:3000/",
     },
-  
+
     resolve: {
       extensions: [".tsx", ".ts", ".jsx", ".js", ".json"],
     },
-  
+
     devServer: {
       //  inline: false,
       port: 3000,
       historyApiFallback: true,
     },
-  
+
     module: {
-  
+
       rules: [{
         test: /.jsx?$/,
         loader: 'babel-loader',
@@ -42,27 +42,29 @@ module.exports =(env)=>{
         },
       }]
     },
-  
+
     plugins: [
-      // new ModuleFederationPlugin({
-      //   name: "host",
-      //   filename: "remoteEntry.js",
-      //   remotes: {
-      //     shared: "shared@http://localhost:3001/remoteEntry.js",
-      //   },
-      //   exposes: {},
-      //   shared: {
-      //     ...deps,
-      //     react: {
-      //       singleton: true,
-      //       requiredVersion: deps.react,
-      //     },
-      //     "react-dom": {
-      //       singleton: true,
-      //       requiredVersion: deps["react-dom"],
-      //     },
-      //   },
-      // }),
+      new ModuleFederationPlugin({
+        name: "host",
+        filename: "remoteEntry.js",
+        remotes: {
+          host: "host@http://localhost:3000/remoteEntry.js",
+          shared: "shared@http://localhost:3001/remoteEntry.js",
+        },
+        exposes: {
+        },
+        shared: {
+          ...deps,
+          react: {
+            singleton: true,
+            requiredVersion: deps.react,
+          },
+          "react-dom": {
+            singleton: true,
+            requiredVersion: deps["react-dom"],
+          },
+        },
+      }),
       new HtmlWebPackPlugin({
         template: "./src/index.html",
       }),
@@ -131,3 +133,46 @@ module.exports =(env)=>{
 
 
 //------------------------------using Promise Based Dynamic Remotes------------------------------//
+
+
+
+
+// module.exports = (env) => {
+//   return {
+//     ...otherConfigs,
+//     plugins: [
+//       new ModuleFederationPlugin({
+//         name: 'container',
+//         remotes: {
+//             app1: lazyLoadRemote('http://localhost:3001/remoteEntry.js', 'app1'),
+//       }})
+//       ],
+//   };
+// };
+
+// function lazyLoadRemote(remoteUrl, appName) {
+//   return `promise new Promise(resolve => {
+//   const script = document.createElement('script')
+//   script.src = '${remoteUrl}'
+
+//   console.log('lazyLoadRemote', script.src);
+
+//   script.onload = () => {
+//     // the injected script has loaded and is available on window
+//     // we can now resolve this Promise
+//     const proxy = {
+//       get: (request) => window.${appName}.get(request),
+//       init: (arg) => {
+//         try {
+//           return window.${appName}.init(arg)
+//         } catch(e) {
+//           console.log('remote container already initialized', e)
+//         }
+//       }
+//     }
+//     resolve(proxy)
+//   }
+//   // inject this script with the src set to the versioned remoteEntry.js
+//   document.head.appendChild(script);
+// })`;
+// }
