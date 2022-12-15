@@ -40,6 +40,8 @@ module.exports = {
       filename: "remoteEntry.js",
       remotes: {
         shared: "shared@http://localhost:3000/remoteEntry.js",
+        host: "host@http://localhost:3000/remoteEntry.js",
+
       },
       exposes: {
         './grid-card':'./src/grid-card',

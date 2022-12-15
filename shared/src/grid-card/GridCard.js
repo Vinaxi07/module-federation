@@ -1,5 +1,6 @@
 import React from "react";
 //import {  useHistory } from "react-router-dom";
+import useStore from "host/store";
 
 import "./product-list.css";
 
@@ -10,9 +11,15 @@ const GridCard = ({ item = {
   offer: '10% off',
   claimed: 20,
   price: 50
-}, index = 0 }) => {
+}, index = 0,
+  showClaimed = true,
+  showAddToCartBtn = true
+}) => {
 
- // let history = useHistory();
+  // let history = useHistory();
+
+  const { addItem } = useStore();
+
 
   return (
     <div className="grid-item" key={index}>
@@ -29,10 +36,12 @@ const GridCard = ({ item = {
       <div className="grid-price padding-top-10">&#x20b9;{item.price}</div>
       <div className="grid-progressbar padding-top-10">
 
-        <div className="grid-progressBar">
-          {`${item.claimed}% claimed`}
-        </div>
-        <button className="cart-button" onClick={()=>{alert(`${item.name} added in cart!`)}}>Add to cart</button>
+        {
+          showClaimed &&
+          <div className="grid-progressBar">
+            {`${item.claimed}% claimed`}
+          </div>}
+        {showAddToCartBtn && <button className="cart-button" onClick={() => { addItem(item) }}>Add to cart</button>}
       </div>
     </div>
   );

@@ -52,6 +52,7 @@ module.exports = (env) => {
           shared: "shared@http://localhost:3001/remoteEntry.js",
         },
         exposes: {
+          "./store": "./src/store",
         },
         shared: {
           ...deps,

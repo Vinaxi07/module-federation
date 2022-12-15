@@ -1,26 +1,28 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
-// import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import { ProductsList as ProductsListConst } from "./constants/index.js";
-import { GridCard } from "shared/grid-card";
+// import { Products, Layout } from "./pages";
+import Products from "./pages/Products";
+import Layout from "./pages/Layout";
 import { Cart } from "shared/cart";
+import useStore from "host/store";
 
 import "./index.scss";
 
 const App = () => {
-  return (
-    <div className="wrapper">
-      <header>
-        <h1 className="app-header">Vodafone App</h1>
-      </header>
+  const { cart } = useStore();
 
-      <div className="grid-container">
-        {ProductsListConst.map((item, index) => {
-          return <GridCard item={item} index={index} key={index} />;
-        })}
-      </div>
-    </div>
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Products />} />
+          <Route path="cart" element={<Cart items={cart} />} />
+          <Route path="*" element={<Products />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 };
 ReactDOM.render(<App />, document.getElementById("app"));
