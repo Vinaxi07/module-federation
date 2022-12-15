@@ -1,11 +1,16 @@
 import React from "react";
+import useStore from "host/store";
 
 import { GridCard } from "shared/grid-card"
 
 const Cart = ({ items = [] }) => {
+  const { emptyCart } = useStore();
+
     return (
         <div className="wrapper">
             <h3 className="app-header">Cart items</h3>
+            <button className="cart-button" onClick={() => { emptyCart() }}>Empty cart</button>
+
             <div className="grid-container">
                 {
                     items?.length ?
