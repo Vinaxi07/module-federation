@@ -91,7 +91,11 @@ module.exports = (env) => {
                 name: "host",
                 filename: "remoteEntry.js",
                 remotes: {
-                  shared: `shared@${process.env.SHARED_COMP_URL}/remoteEntry.js`
+                host: "host@http://localhost:3000/remoteEntry.js",
+                  shared: "shared@http://localhost:3001/remoteEntry.js",
+                },
+                exposes: {
+                  "./store": "./src/store",
                 },
                 shared: {
                   ...deps,
