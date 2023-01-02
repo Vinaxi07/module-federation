@@ -50,7 +50,7 @@ module.exports = {
       },
       shared: {
         ...deps,
-        react: {
+        "react": {
           singleton: true,
           requiredVersion: deps.react,
         },

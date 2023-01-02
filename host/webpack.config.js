@@ -56,7 +56,7 @@ module.exports = (env) => {
         },
         shared: {
           ...deps,
-          react: {
+          "react": {
             singleton: true,
             //strictVersion:true,
             requiredVersion: deps.react, //">=17.0.0<18.0.0."
@@ -79,7 +79,6 @@ module.exports = (env) => {
 
 
 //--------------------------------------------using environment-----------------------------------------//
-
 /**
 
     module.exports = (env) => {
@@ -117,7 +116,6 @@ module.exports = (env) => {
 
 
 //-----------------------------------------using external-remotes-plugin--------------------------------------//
-
 /**
 
     module.exports = (env) => {
